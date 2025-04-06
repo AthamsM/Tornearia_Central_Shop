@@ -1,7 +1,7 @@
 package br.com.torneariacentralshop.api.entities;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+//import java.sql.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,12 +20,28 @@ public class Product {
 	private String name;
 	private String description;
 	private BigDecimal price;
-	private String category;
 	private int stock;
 	private float rating;
-	private Date createAt;
+	//private Date createdAt;
 	
+	public Product() {
+
+	}
+
 	
+	public Product(int id, String name, String description, BigDecimal price, int stock, float rating) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+		this.rating = rating;
+	}
+	
+	public int getId() {
+		return id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -44,12 +60,6 @@ public class Product {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
 	public int getStock() {
 		return stock;
 	}
@@ -62,12 +72,14 @@ public class Product {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public Date getCreateAt() {
-		return createAt;
+	/*
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
+	*/
 	
 	
 	

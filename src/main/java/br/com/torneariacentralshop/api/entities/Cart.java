@@ -22,6 +22,15 @@ public class Cart {
 	@JoinColumn(name = "userId")
 	private User user;
 	
+	public Cart() {
+
+	}
+	
+	public Cart(int id, User user) {
+		this.id = id;
+		this.user = user;
+	}
+
 	public User getUser() {
 	    return user;
 	}

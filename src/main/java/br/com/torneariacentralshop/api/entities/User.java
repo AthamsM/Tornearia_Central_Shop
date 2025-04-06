@@ -1,6 +1,9 @@
 package br.com.torneariacentralshop.api.entities;
 
-import java.sql.Date;
+import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +22,25 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	private Date creatAt;
+	//@CreatedDate
+	//private Instant createdAt;
+	//@LastModifiedBy
+	//private Instant updatedAt;
 	
+	public User() {
+	}
+	
+	public User(int id, String name, String email, String password, Instant createdAt, Instant updatedAt) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		//this.createdAt = createdAt;
+		//this.updatedAt = updatedAt;
+	}
+	public int getId() {
+		return id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -39,11 +59,19 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getCreatAt() {
-		return creatAt;
-	}
-	public void setCreatAt(Date creatAt) {
-		this.creatAt = creatAt;
-	}
+//	public Instant getCreatAt() {
+//		return createdAt;
+//	}
+//	public void setCreatAt(Instant createdAt) {
+//		this.createdAt = createdAt;
+//	}
+
+//	public Instant getUpdatedAt() {
+//		return updatedAt;
+//	}
+//
+//	public void setUpdatedAt(Instant updatedAt) {
+//		this.updatedAt = updatedAt;
+//	}
 
 }

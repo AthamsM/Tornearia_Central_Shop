@@ -29,6 +29,16 @@ public class CartItem {
 	@JoinColumn(name = "productId")
 	private Product product;
 
+	public CartItem() {
+	}
+	
+	public CartItem(BigDecimal subtotal, int quantity, Cart cart, Product product) {
+		this.subtotal = subtotal;
+		this.quantity = quantity;
+		this.cart = cart;
+		this.product = product;
+	}
+
 	public BigDecimal getSubtotal() {
 		return subtotal;
 	}

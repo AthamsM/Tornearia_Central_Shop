@@ -23,11 +23,27 @@ public class Payment {
 	private int transactionId;
 	private BigDecimal amount;
 	private String status;
-	private Date createAt;
+	private Date createdAt;
 	
 	@OneToOne
 	@JoinColumn(name = " ordeId")
 	private Order order;
+
+	public Payment() {
+
+	}
+	
+	public Payment(int id, String paymentMethod, int transactionId, BigDecimal amount, String status, Date createdAt,
+			Order order) {
+		super();
+		this.id = id;
+		this.paymentMethod = paymentMethod;
+		this.transactionId = transactionId;
+		this.amount = amount;
+		this.status = status;
+		this.createdAt = createdAt;
+		this.order = order;
+	}
 
 	public String getPaymentMethod() {
 		return paymentMethod;
@@ -62,11 +78,11 @@ public class Payment {
 	}
 
 	public Date getCreateAt() {
-		return createAt;
+		return createdAt;
 	}
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	public void setCreateAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public Order getOrder() {

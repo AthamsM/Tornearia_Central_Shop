@@ -21,13 +21,26 @@ public class Order {
 	private int id;
 	private BigDecimal totalPrice;
 	private String status;
-	private String paymentMethod;
 	private String trackingCode;
-	private Date creatAt;
+	private Date createdAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
+
+	public Order() {
+
+	}
+	
+	public Order(int id, BigDecimal totalPrice, String status, String paymentMethod, String trackingCode,
+			Date createdAt, User user) {
+		this.id = id;
+		this.totalPrice = totalPrice;
+		this.status = status;
+		this.trackingCode = trackingCode;
+		this.createdAt = createdAt;
+		this.user = user;
+	}
 
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
@@ -45,14 +58,6 @@ public class Order {
 		this.status = status;
 	}
 
-	public String getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
 	public String getTrackingCode() {
 		return trackingCode;
 	}
@@ -62,11 +67,11 @@ public class Order {
 	}
 
 	public Date getCreatAt() {
-		return creatAt;
+		return createdAt;
 	}
 
-	public void setCreatAt(Date creatAt) {
-		this.creatAt = creatAt;
+	public void setCreatAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public User getUser() {

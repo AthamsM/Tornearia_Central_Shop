@@ -19,11 +19,23 @@ public class Review {
 	private int id;
 	private float rating;
 	private String comment;
-	private Date creatAt;
+	private Date createdAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
+
+	public Review() {
+	}
+	
+	public Review(int id, float rating, String comment, Date createdAt, User user) {
+		super();
+		this.id = id;
+		this.rating = rating;
+		this.comment = comment;
+		this.createdAt = createdAt;
+		this.user = user;
+	}
 
 	public float getRating() {
 		return rating;
@@ -42,11 +54,11 @@ public class Review {
 	}
 
 	public Date getCreatAt() {
-		return creatAt;
+		return createdAt;
 	}
 
-	public void setCreatAt(Date creatAt) {
-		this.creatAt = creatAt;
+	public void setCreatAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	public User getUser() {
 	    return user;

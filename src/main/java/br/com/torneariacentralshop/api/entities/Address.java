@@ -28,7 +28,20 @@ public class Address {
 	@JoinColumn(name = "userId")
 	private User user;
 
+	public Address() {}
 	
+	public Address(int id, String place, String number, String complement, String neighborhood, String city,
+			String state, String cep, User user) {
+		this.id = id;
+		this.place = place;
+		this.number = number;
+		this.complement = complement;
+		this.neighborhood = neighborhood;
+		this.city = city;
+		this.state = state;
+		this.cep = cep;
+		this.user = user;
+	}
 	public String getPlace() {
 		return place;
 	}
