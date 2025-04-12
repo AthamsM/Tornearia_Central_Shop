@@ -20,6 +20,17 @@ public class ImageProduct {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	
+	public ImageProduct() {}
+	
+	public ImageProduct(String url, Product product) {
+		this.url = url;
+		this.product = product;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public String getUrl() {
 		return url;

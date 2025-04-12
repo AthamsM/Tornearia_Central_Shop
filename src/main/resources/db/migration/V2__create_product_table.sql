@@ -11,5 +11,5 @@ CREATE TABLE image_products(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	url TEXT,
 	product_id INT,
-	FOREIGN KEY (product_id) REFERENCES products(id) ON CASCADE
+	FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 	);
