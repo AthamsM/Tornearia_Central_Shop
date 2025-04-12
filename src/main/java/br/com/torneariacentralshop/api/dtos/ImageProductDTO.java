@@ -1,8 +1,6 @@
 package br.com.torneariacentralshop.api.dtos;
 
-
-public record UserResponseDTO(
+public record ImageProductDTO(
 		int id, 
-		String name, 
-		String email
+		String url
 		) {}

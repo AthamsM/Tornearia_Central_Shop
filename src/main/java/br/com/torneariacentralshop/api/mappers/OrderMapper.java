@@ -18,7 +18,7 @@ public class OrderMapper {
 	
 	public static Order toEntity(OrderDTO orderDTO) {
 		Order order = new Order();
-		order.setUser(orderDTO.userId());
+		order.setUser(orderDTO.user_id());
 		order.setTotalPrice(orderDTO.totalPrice());
 		return order;
 	}

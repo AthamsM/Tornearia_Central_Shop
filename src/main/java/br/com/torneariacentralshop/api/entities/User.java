@@ -2,9 +2,6 @@ package br.com.torneariacentralshop.api.entities;
 
 import java.time.Instant;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -73,5 +70,4 @@ public class User {
 //	public void setUpdatedAt(Instant updatedAt) {
 //		this.updatedAt = updatedAt;
 //	}
-
 }

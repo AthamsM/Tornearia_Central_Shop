@@ -25,7 +25,7 @@ public class Order {
 	private Date createdAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Order() {

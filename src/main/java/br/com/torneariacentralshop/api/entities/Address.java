@@ -25,7 +25,7 @@ public class Address {
 	private String cep;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Address() {}
@@ -42,6 +42,10 @@ public class Address {
 		this.cep = cep;
 		this.user = user;
 	}
+	public int getId() {
+		return id;
+	}
+	
 	public String getPlace() {
 		return place;
 	}
@@ -91,6 +95,4 @@ public class Address {
 	public void setUser(User user) {
 	    this.user = user;
 	}
-	
-
 }

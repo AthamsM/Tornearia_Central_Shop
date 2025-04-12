@@ -30,7 +30,6 @@ public class Product {
 
 	
 	public Product(int id, String name, String description, BigDecimal price, int stock, float rating) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;

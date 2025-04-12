@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import br.com.torneariacentralshop.api.entities.User;
 
 public record OrderResponseDTO(
-		User userId, 
+		User user_id, 
 		BigDecimal totalPrice,
 		String status, 
 		String trackingMethod) {}

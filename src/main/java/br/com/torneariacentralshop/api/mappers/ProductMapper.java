@@ -10,7 +10,6 @@ public class ProductMapper {
 		return new ProductResponseDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getRating(), product.getStock());		
 	}
 	public static Product toEntity(ProductDTO productDTO) {
-		
 		Product product = new Product();
 		product.setName(productDTO.name());
 		product.setDescription(productDTO.description());
@@ -18,5 +17,4 @@ public class ProductMapper {
 		product.setStock(productDTO.stock());
 		return product;
 	}
-
 }

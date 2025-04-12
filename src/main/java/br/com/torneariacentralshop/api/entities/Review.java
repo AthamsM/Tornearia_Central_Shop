@@ -22,14 +22,13 @@ public class Review {
 	private Date createdAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Review() {
 	}
 	
 	public Review(int id, float rating, String comment, Date createdAt, User user) {
-		super();
 		this.id = id;
 		this.rating = rating;
 		this.comment = comment;

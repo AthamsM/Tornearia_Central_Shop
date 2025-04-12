@@ -1,7 +1,8 @@
 package br.com.torneariacentralshop.api.dtos;
 
-public record AddressDTO(
-		int user,
+public record AddressResponseDTO(
+		int id,
+		int user_id,
 		String place, 
 		String number, 
 		String complement,
@@ -9,4 +10,4 @@ public record AddressDTO(
 		String city, 
 		String state,
 		String cep
-		) {}
+        ) {}

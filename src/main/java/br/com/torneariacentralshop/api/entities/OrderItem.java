@@ -22,18 +22,17 @@ public class OrderItem {
 	private BigDecimal subtotal;
 	
 	@ManyToOne
-	@JoinColumn(name = "ordeId")
+	@JoinColumn(name = "orde_id")
 	private Order order;
 	
 	@ManyToOne
-	@JoinColumn(name = "productId")
+	@JoinColumn(name = "product_id")
 	private Product product;
 	
 	public OrderItem() {
 	}
 
 	public OrderItem(int id, int quantity, BigDecimal subtotal, Order order, Product product) {
-		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.subtotal = subtotal;

@@ -6,3 +6,10 @@ CREATE TABLE products(
 	rating FLOAT DEFAULT 0,
 	stock INT NOT NULL
 	);
+	
+CREATE TABLE image_products(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	url TEXT,
+	product_id INT,
+	FOREIGN KEY (product_id) REFERENCES products(id) ON CASCADE
+	);

@@ -11,22 +11,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "cartItems")
+@Table(name = "cart_items")
 
 public class CartItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private BigDecimal subtotal;
 	private int quantity;
+	private BigDecimal subtotal;
 	
 	@ManyToOne
-	@JoinColumn(name = "cartId")
+	@JoinColumn(name = "cart_id")
 	private Cart cart;
 	
 	@ManyToOne
-	@JoinColumn(name = "productId")
+	@JoinColumn(name = "product_id")
 	private Product product;
 
 	public CartItem() {

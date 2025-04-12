@@ -19,7 +19,7 @@ public class Cart {
 	private int id;
 	
 	@OneToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	public Cart() {
@@ -30,6 +30,13 @@ public class Cart {
 		this.id = id;
 		this.user = user;
 	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
 
 	public User getUser() {
 	    return user;

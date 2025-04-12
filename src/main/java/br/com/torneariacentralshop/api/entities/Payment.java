@@ -26,7 +26,7 @@ public class Payment {
 	private Date createdAt;
 	
 	@OneToOne
-	@JoinColumn(name = " ordeId")
+	@JoinColumn(name = " orde_id")
 	private Order order;
 
 	public Payment() {
@@ -35,7 +35,6 @@ public class Payment {
 	
 	public Payment(int id, String paymentMethod, int transactionId, BigDecimal amount, String status, Date createdAt,
 			Order order) {
-		super();
 		this.id = id;
 		this.paymentMethod = paymentMethod;
 		this.transactionId = transactionId;
