@@ -51,7 +51,7 @@ public class UserController {
 	
 	@PutMapping("/address")
 	public ResponseEntity<AddressResponseDTO> updateAddressToUser(@RequestBody AddressUpdateDTO addressUpdateDTO){
-		return new ResponseEntity<>(addressService.updateAddressToUser(addressUpdateDTO), HttpStatus.CREATED);
+		return new ResponseEntity<>(addressService.updateAddressToUser(addressUpdateDTO), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
