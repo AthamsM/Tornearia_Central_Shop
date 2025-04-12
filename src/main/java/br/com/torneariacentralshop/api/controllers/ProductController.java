@@ -59,6 +59,10 @@ public class ProductController {
 	public ResponseEntity<ProductResponseDTO> readProduct(@PathVariable(name = "id")int id){
 		return new ResponseEntity<>(productService.readProduct(id), HttpStatus.OK);
 	}
+	@GetMapping("image/{product_id}")
+	public ResponseEntity<List<ImageProductDTO>> readImageToProduct(@PathVariable(name = "product_id")int product_id){
+		return new ResponseEntity<>(imageProductService.readImageToProduct(product_id), HttpStatus.OK);
+	}
 	
 	@GetMapping
 	public List<ProductResponseDTO> ListAll(){

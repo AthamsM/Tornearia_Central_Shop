@@ -1,5 +1,7 @@
 package br.com.torneariacentralshop.api.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,8 @@ public class ImageProductService {
 		return true;
 	}
 	
+	public List<ImageProductDTO> readImageToProduct(int product_id){
+		return imageProductRepository.listImagetoProduct(product_id).stream().map(ImageProductMapper::toDTO).toList();
+	}
 	
 }
