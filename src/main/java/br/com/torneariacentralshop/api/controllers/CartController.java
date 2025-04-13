@@ -40,10 +40,8 @@ public class CartController {
 		return new ResponseEntity<>(cartService.deleteCartItem(user_id), HttpStatus.OK);
 	}
 	
-	
 	@GetMapping("{user_id}")
 	public ResponseEntity<BigDecimal> getTotalPrice (@PathVariable(name = "user_id")int user_id){
 		return new ResponseEntity<>(cartService.getTotalPrice(user_id),  HttpStatus.OK);
 	}
-
 }
