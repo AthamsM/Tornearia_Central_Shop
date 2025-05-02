@@ -1,18 +1,21 @@
 package br.com.torneariacentralshop.api.entities;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
+import br.com.torneariacentralshop.api.enums.OrderStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ordes")
+@Table(name = "orders")
 
 public class Order {
 	
@@ -20,26 +23,33 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private BigDecimal totalPrice;
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status = OrderStatus.PROCESSING;
 	private String trackingCode;
-	private Date createdAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@OneToOne
+	@JoinColumn(name = "payment_id")
+	private Payment payment;
+
+
 	public Order() {
 
 	}
 	
-	public Order(int id, BigDecimal totalPrice, String status, String paymentMethod, String trackingCode,
-			Date createdAt, User user) {
-		this.id = id;
+	public Order(BigDecimal totalPrice, OrderStatus status, String trackingCode, User user, Payment payment) {
 		this.totalPrice = totalPrice;
 		this.status = status;
 		this.trackingCode = trackingCode;
-		this.createdAt = createdAt;
 		this.user = user;
+		this.payment = payment;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public BigDecimal getTotalPrice() {
@@ -50,11 +60,11 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public String getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 
@@ -65,15 +75,7 @@ public class Order {
 	public void setTrackingCode(String trackingCode) {
 		this.trackingCode = trackingCode;
 	}
-
-	public Date getCreatAt() {
-		return createdAt;
-	}
-
-	public void setCreatAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -81,6 +83,13 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 }
