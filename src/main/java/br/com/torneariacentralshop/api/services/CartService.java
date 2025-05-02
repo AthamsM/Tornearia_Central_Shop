@@ -33,7 +33,7 @@ public class CartService {
 	public CartItemResponseDTO insertCartItem(int user_id, int product_id, int quantity) {
 		User user = userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Error search User"));
 		Product product = productRepository.findById(product_id).orElseThrow(() -> new RuntimeException("Error serch Product"));
-		Cart cart = cartRepository.findByUser(user_id);
+		Cart cart = cartRepository.findByUserId(user_id);
 		if(cart == null) {
 			cart = createCartToUser(user);
 		}
@@ -83,5 +83,9 @@ public class CartService {
 			total = total.add(aux);
 		}
 		return total;
+	}
+	
+	public List<CartItemResponseDTO> getAllCartItem(int cart_id){
+		return cartItemRepositoy.findByCart(cart_id).stream().map(CartItemMapper :: toDTO).toList();
 	}
 }
