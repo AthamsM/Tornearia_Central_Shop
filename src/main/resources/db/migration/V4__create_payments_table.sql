@@ -1,0 +1,8 @@
+CREATE TABLE payments(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
+	payment_method VARCHAR(20) NOT NULL,
+	amount DECIMAL(10,2) NOT NULL,
+	status VARCHAR(20) NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
