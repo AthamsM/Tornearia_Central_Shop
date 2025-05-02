@@ -8,6 +8,5 @@ public record ProductUpdateDTO(
 		String description, 
 		BigDecimal price, 
 		float rating, 
-		int stock,
-		ImageProductDTO img
+		int stock
 		) {}
