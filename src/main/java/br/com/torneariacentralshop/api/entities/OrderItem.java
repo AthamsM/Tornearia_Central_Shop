@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "orderItems")
+@Table(name = "order_items")
 
 public class OrderItem {
 	
@@ -22,7 +22,7 @@ public class OrderItem {
 	private BigDecimal subtotal;
 	
 	@ManyToOne
-	@JoinColumn(name = "orde_id")
+	@JoinColumn(name = "order_id")
 	private Order order;
 	
 	@ManyToOne
@@ -32,12 +32,15 @@ public class OrderItem {
 	public OrderItem() {
 	}
 
-	public OrderItem(int id, int quantity, BigDecimal subtotal, Order order, Product product) {
-		this.id = id;
+	public OrderItem(int quantity, BigDecimal subtotal, Order order, Product product) {
 		this.quantity = quantity;
 		this.subtotal = subtotal;
 		this.order = order;
 		this.product = product;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public int getQuantity() {
@@ -70,7 +73,5 @@ public class OrderItem {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-	
-	
+	}	
 }
