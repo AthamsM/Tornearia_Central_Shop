@@ -1,14 +1,17 @@
 package br.com.torneariacentralshop.api.entities;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
+import br.com.torneariacentralshop.api.enums.PaymentMethod;
+import br.com.torneariacentralshop.api.enums.PaymentStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,45 +22,40 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String paymentMethod;
-	private int transactionId;
+	@Enumerated(EnumType.STRING)
+	private PaymentMethod paymentMethod;
 	private BigDecimal amount;
-	private String status;
-	private Date createdAt;
+	@Enumerated(EnumType.STRING)
+	private PaymentStatus status = PaymentStatus.INPROCESSING;
+	//private Date createdAt;
 	
-	@OneToOne
-	@JoinColumn(name = " orde_id")
-	private Order order;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 
 	public Payment() {
 
 	}
 	
-	public Payment(int id, String paymentMethod, int transactionId, BigDecimal amount, String status, Date createdAt,
-			Order order) {
-		this.id = id;
+	public Payment(PaymentMethod paymentMethod, BigDecimal amount,PaymentStatus paymentStatus,
+			User user) {
 		this.paymentMethod = paymentMethod;
-		this.transactionId = transactionId;
 		this.amount = amount;
-		this.status = status;
-		this.createdAt = createdAt;
-		this.order = order;
+		this.status = paymentStatus;
+		this.user = user;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
-	public String getPaymentMethod() {
+	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
 
-	public void setPaymentMethod(String paymentMethod) {
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
-	}
-
-	public int getTransactionId() {
-		return transactionId;
-	}
-
-	public void setTransactionId(int transactionId) {
-		this.transactionId = transactionId;
 	}
 
 	public BigDecimal getAmount() {
@@ -68,29 +66,19 @@ public class Payment {
 		this.amount = amount;
 	}
 
-	public String getStatus() {
+	public PaymentStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(PaymentStatus status) {
 		this.status = status;
 	}
 
-	public Date getCreateAt() {
-		return createdAt;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCreateAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-	
-	
 }
