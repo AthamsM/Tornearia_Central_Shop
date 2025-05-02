@@ -1,6 +1,7 @@
 package br.com.torneariacentralshop.api.controllers;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,10 @@ public class CartController {
 	@GetMapping("{user_id}")
 	public ResponseEntity<BigDecimal> getTotalPrice (@PathVariable(name = "user_id")int user_id){
 		return new ResponseEntity<>(cartService.getTotalPrice(user_id),  HttpStatus.OK);
+	}
+	
+	@GetMapping("/items/{cart_id}")
+	public ResponseEntity<List<CartItemResponseDTO>> getAllCartItem(@PathVariable(name = "cart_id")int cart_id){
+		return new ResponseEntity<>(cartService.getAllCartItem(cart_id), HttpStatus.OK);
 	}
 }
