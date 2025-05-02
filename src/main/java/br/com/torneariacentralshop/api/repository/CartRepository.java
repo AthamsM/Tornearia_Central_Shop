@@ -11,5 +11,5 @@ import br.com.torneariacentralshop.api.entities.Cart;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 	@Query(value = ("SELECT * FROM carts WHERE user_id = :user_id"), nativeQuery = true)
-	Cart findByUser(@Param("user_id")int user_id);
+	Cart findByUserId(@Param("user_id")int user_id);
 }
