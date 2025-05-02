@@ -30,7 +30,7 @@ public class ProductService {
 		product.setDescription(updateProductDTO.description());
 		product.setPrice(updateProductDTO.price());
 		product.setStock(updateProductDTO.stock());
-		
+		productRepository.save(product);
 		return ProductMapper.toDTO(product);
 			
 	}
