@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import br.com.torneariacentralshop.api.entities.Payment;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Integer>{
-
-}
+public interface PaymentRepository extends JpaRepository<Payment, Integer>{}
