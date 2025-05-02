@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,13 +37,13 @@ public class OrderController {
 		return new ResponseEntity<>(orderService.updateOrder(id, status), HttpStatus.OK);
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<OrderResponseDTO>> getAllOrder(@RequestParam int id){
+	@GetMapping("/{id}")
+	public ResponseEntity<List<OrderResponseDTO>> getAllOrder(@PathVariable(name = "id") int id){
 		return new ResponseEntity<>(orderService.getAllOrder(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/items")
-	public ResponseEntity<List<OrderItemResponseDTO>> getAllOrdeItem(@RequestParam int id){
+	@GetMapping("/items/{id}")
+	public ResponseEntity<List<OrderItemResponseDTO>> getAllOrdeItem(@PathVariable(name = "id") int id){
 		return new ResponseEntity<>(orderService.getAllOrderItem(id), HttpStatus.OK);
 	}
 	
