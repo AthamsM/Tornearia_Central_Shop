@@ -35,7 +35,7 @@ public class UserController {
 	private AddressService addressService;
 	
 	@PostMapping
-	public ResponseEntity<UserResponseDTO> createProduct(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserDTO userDTO) {
 		return new ResponseEntity<>(userService.createUser(userDTO), HttpStatus.CREATED);
 	}
 	
