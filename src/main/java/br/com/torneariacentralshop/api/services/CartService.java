@@ -37,6 +37,9 @@ public class CartService {
 		if(cart == null) {
 			cart = createCartToUser(user);
 		}
+		if(product.getStock() < quantity) {
+			throw new RuntimeException("There is not enough quantity in stock") ;
+		}
 		
 		CartItem cartItem = new CartItem(product.getPrice().multiply(BigDecimal.valueOf(quantity)),
 										quantity,
