@@ -22,6 +22,7 @@ public class SecurityConfig {
 	private static final String[] ENDPOINTS = {
 		"/api/users/register",
 		"/api/users/auth",
+		"/api/products/list",
 	};
 	
 	public SecurityConfig(JwtFilter filter, UserDatailsServiceImpl datailsServiceImpl) {
