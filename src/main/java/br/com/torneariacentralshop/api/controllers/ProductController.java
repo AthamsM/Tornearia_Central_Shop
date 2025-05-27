@@ -64,7 +64,7 @@ public class ProductController {
 		return new ResponseEntity<>(imageProductService.readImageToProduct(product_id), HttpStatus.OK);
 	}
 	
-	@GetMapping
+	@GetMapping("/list")
 	public List<ProductResponseDTO> ListAll(){
 		return productService.readProductAll();
 	}
