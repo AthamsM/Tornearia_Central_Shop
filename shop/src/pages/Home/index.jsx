@@ -18,9 +18,9 @@ function Home(){
         getProducts()
     }, [])
     return(
-        <div className="bg-[#F5F5F5] h-screen">
+        <div className="bg-[#F5F5F5] flex flex-col min-h-screen">
             <Navbar/>
-            <div className="m-10 grid grid-cols-6 ">
+            <div className="p-20 grid grid-cols-4 gap-7 2xl:grid-cols-5 2xl:gap-10 h-full">
                 {produtos.map(products => (
                     <Products key={products.id} products={products}/>
                 ))}
