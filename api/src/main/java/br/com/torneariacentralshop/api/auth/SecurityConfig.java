@@ -23,6 +23,7 @@ public class SecurityConfig {
 		"/api/users/register",
 		"/api/users/auth",
 		"/api/products/list",
+		"/api/products/product/*",
 	};
 	
 	public SecurityConfig(JwtFilter filter, UserDatailsServiceImpl datailsServiceImpl) {
