@@ -1,8 +1,12 @@
 import { IoMdSearch } from "react-icons/io";
 import { CgShoppingCart } from "react-icons/cg";
 import { PiUserCircleFill } from "react-icons/pi";
+import { jwtDecode } from "jwt-decode";
 
 function Navbar({ children }) {
+    const token = localStorage.getItem("token");
+    const decodeToken = jwtDecode(token)
+    const userName = decodeToken.name
     return (
         <div className="bg-[#BF1919] px-25 h-[8rem] flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -20,7 +24,7 @@ function Navbar({ children }) {
                 </div>
                 <div>
                     <PiUserCircleFill className="text-white text-5xl" />
-                    <p className="text-white text-center">User</p>
+                    <p className="text-white text-center">{userName}</p>
                 </div>
             </div>
         </div>

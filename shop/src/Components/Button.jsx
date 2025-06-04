@@ -1,21 +1,26 @@
 import { LiaCartPlusSolid } from "react-icons/lia";
 import API from "../Controller/Api";
-import { useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-function Button() {
-    const navigate = Navigator
+function Button( {product} ) {
+    const navigate = useNavigate()
+    const productId = product.id
+    const quantity = 1
     function ClicaNiMim() {
-        const token = localStorage.getItem('auth_token')
+        const token = localStorage.getItem('token')
         console.log(token)
         if (token === null) {
             navigate("/inicio")
         } else {
             insertCart();
         }
-        const insertCart = () => {
+        async function insertCart(){
             try {
-                const reponse = API.post(`carts/`)
+                const decodeToken = jwtDecode(token)
+                const userId = decodeToken.id
+                const reponse = API.post(`carts/${userId}?product_id=${productId}&quantity=${quantity}`)
+                console.log(reponse)
             }
             catch (error) {
                 console.log(error)
@@ -24,7 +29,7 @@ function Button() {
     }
     return (
         <div className="flex bg-[#1E4D05] rounded-[0.625rem] hover:scale-[1.05] justify-center w-20">
-            <button onClick={() => { ClicaNiMim() }} className="flex w-10 text-center justify-center"><LiaCartPlusSolid className="text-white text-3xl" /></button>
+            <button onClick={() => { ClicaNiMim()}} className="flex w-10 text-center justify-center"><LiaCartPlusSolid className="text-white text-3xl" /></button>
         </div>
     )
 }

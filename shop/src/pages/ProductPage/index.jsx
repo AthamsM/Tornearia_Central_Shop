@@ -34,7 +34,7 @@ function ProductPage() {
                         <h2 className="text-xl font-bold mb-5">Por: {product.price}$</h2>
                         <h3 className="text-lg font-semibold">Descrição:</h3>
                         <p className="mb-5 text-lg">{product.description}</p>
-                        <Button />
+                        <Button product={product} />
                     </div>
                 </div>
             </div>

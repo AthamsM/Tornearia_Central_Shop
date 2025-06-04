@@ -1,3 +1,4 @@
+import Login_Register from "./teste/Login_Register";
 import Home from "./Home"
 import ProductPage from "./ProductPage";
 import Register from "./Register";
@@ -6,11 +7,7 @@ import Start from "./Start";
 const Pages = [
     {
         path : "/inicio",
-        component : <Start/>
-    },
-    {
-        path : "/cadastrar",
-        component : <Register/>
+        component : <Login_Register/>
     },
     {
         path : "/home",
