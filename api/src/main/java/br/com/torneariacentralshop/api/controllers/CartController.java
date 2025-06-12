@@ -36,9 +36,14 @@ public class CartController {
 		return new ResponseEntity<>(cartService.updateCartItem(cartItem_id, quantity), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("{user_id}")
-	public ResponseEntity<String> deleteCartItem(@PathVariable(name = "user_id")int user_id){
-		return new ResponseEntity<>(cartService.deleteCartItem(user_id), HttpStatus.OK);
+	@DeleteMapping("/{cart_id}")
+	public ResponseEntity<String> deleteCartItem(@PathVariable(name = "cart_id")int cart_id){
+		return new ResponseEntity<>(cartService.deleteCartItem(cart_id), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/item/{item_id}")
+	public ResponseEntity<String> deleteItemCart(@PathVariable(name = "item_id")int item_id){
+		return new ResponseEntity<>(cartService.deleteItemCart(item_id), HttpStatus.OK);
 	}
 	
 	@GetMapping("{user_id}")
