@@ -77,6 +77,12 @@ public class CartService {
 		return"deletado";
 	}
 	
+	@Transactional
+	public String deleteItemCart(int item_id) {
+		cartItemRepositoy.deleteItemCart(item_id);
+		return"deletado";
+	}
+	
 	public BigDecimal getTotalPrice(int cart_id) {
 		List<CartItem> cartItem = cartItemRepositoy.findByCart(cart_id);
 		
