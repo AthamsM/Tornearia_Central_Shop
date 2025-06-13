@@ -37,15 +37,17 @@ public class CartService {
 		if(cart == null) {
 			cart = createCartToUser(user);
 		}
-		if(product.getStock() < quantity) {
-			throw new RuntimeException("There is not enough quantity in stock") ;
+		CartItem cartItem = cartItemRepositoy.findByCartIdAndProductId(cart.getId(), product_id);
+		if(cartItem == null) {
+			cartItem = new CartItem(product.getPrice().multiply(BigDecimal.valueOf(quantity)), quantity, cart, product);
+		}else {
+			cartItem.setQuantity(cartItem.getQuantity() + quantity);
+			cartItem.setSubtotal(cartItem.getSubtotal().add(product.getPrice().multiply(BigDecimal.valueOf(quantity))));
 		}
 		
-		CartItem cartItem = new CartItem(product.getPrice().multiply(BigDecimal.valueOf(quantity)),
-										quantity,
-										cart,
-										product
-										);
+		if(product.getStock() < cartItem.getQuantity()) {
+			throw new RuntimeException("There is not enough quantity in stock") ;
+		}
 		return CartItemMapper.toDTO(cartItemRepositoy.save(cartItem));
 	}
 	
