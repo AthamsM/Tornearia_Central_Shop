@@ -19,7 +19,7 @@ function Start( {setStatus} ) {
                 localStorage.setItem("token", response.data.token)
                 navigate("/home")
             }else{
-                alert(response.data.message)
+                alert(response.data)
             }
         }catch(error){
             console.log(error)
