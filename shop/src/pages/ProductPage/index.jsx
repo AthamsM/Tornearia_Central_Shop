@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import Navbar from "../../Layout/Navbar";
 import API from "../../Controller/Api";
 import Button from "../../Components/Button";
+import Template from "../../Layout/Template";
 
 function ProductPage() {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState("1")
 
     useEffect(() => {
         const getProdut = async () => {
@@ -23,7 +25,6 @@ function ProductPage() {
 
     return (
         <div className="bg-[#F5F5F5] h-screen">
-            <Navbar />
             <div className="grid place-items-center">
                 <div className="flex items-center m-20 gap-15 w-1/2 rounded-[10px] shadow-lg shadow-slate-600 hover:scale-[1.008] duration-200 ease-out">
                     <div>
@@ -34,7 +35,14 @@ function ProductPage() {
                         <h2 className="text-xl font-bold mb-5">Por: {product.price}$</h2>
                         <h3 className="text-lg font-semibold">Descrição:</h3>
                         <p className="mb-5 text-lg">{product.description}</p>
-                        <Button product={product} />
+                        <p className="text-center">Quantidade:{product.stock}</p>
+                        <div className="flex">
+                            <p className="pr-2">Quantidade:</p>
+                            <input type="number" value={quantity} className="w-10" onChange={(e) => setQuantity(e.target.value)}/>
+                        </div>
+                        <div className="">
+                            <Button product={product} quant={quantity}/>
+                        </div>
                     </div>
                 </div>
             </div>
