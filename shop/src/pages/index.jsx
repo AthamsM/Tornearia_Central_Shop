@@ -1,21 +1,25 @@
-import Login_Register from "./teste/Login_Register";
+import Login_Register from "./StartandRegister/Login_Register";
 import Home from "./Home"
 import ProductPage from "./ProductPage";
-import Register from "./Register";
-import Start from "./Start";
+import Cart from "./Cart";
+import Template from "../Layout/Template";
 
 const Pages = [
     {
-        path : "/inicio",
+        path : "/",
         component : <Login_Register/>
     },
     {
         path : "/home",
-        component : <Home/>
+        component : <Template><Home/></Template>
     },
     {
         path : "/produto/:id",
-        component : <ProductPage/>
-    }
+        component : <Template><ProductPage/></Template>
+    },
+    {
+        path : "/cart",
+        component : <Template><Cart/></Template>
+    },
 ]
 export default Pages;
