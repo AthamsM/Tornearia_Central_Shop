@@ -65,6 +65,9 @@ public class CartService {
 			cartItemRepositoy.delete(cartItem);
 			return null;
 		}
+		if(cartItem.getProduct().getStock() < cartItem.getQuantity()) {
+			throw new RuntimeException("There is not enough quantity in stock") ;
+		}
 		if(quantity > 0) {
 			cartItem.setSubtotal(cartItem.getSubtotal().add(cartItem.getProduct().getPrice()));			
 		}else {
@@ -96,7 +99,8 @@ public class CartService {
 		return total;
 	}
 	
-	public List<CartItemResponseDTO> getAllCartItem(int cart_id){
-		return cartItemRepositoy.findByCart(cart_id).stream().map(CartItemMapper :: toDTO).toList();
+	public List<CartItemResponseDTO> getAllCartItem(int user_id){
+		Cart cart = cartRepository.findByUserId(user_id);
+		return cartItemRepositoy.findByCart(cart.getId()).stream().map(CartItemMapper :: toDTO).toList();
 	}
 }
