@@ -51,8 +51,8 @@ public class CartController {
 		return new ResponseEntity<>(cartService.getTotalPrice(user_id),  HttpStatus.OK);
 	}
 	
-	@GetMapping("/items/{cart_id}")
-	public ResponseEntity<List<CartItemResponseDTO>> getAllCartItem(@PathVariable(name = "cart_id")int cart_id){
-		return new ResponseEntity<>(cartService.getAllCartItem(cart_id), HttpStatus.OK);
+	@GetMapping("/items/{user_id}")
+	public ResponseEntity<List<CartItemResponseDTO>> getAllCartItem(@PathVariable(name = "user_id")int user_id){
+		return new ResponseEntity<>(cartService.getAllCartItem(user_id), HttpStatus.OK);
 	}
 }
