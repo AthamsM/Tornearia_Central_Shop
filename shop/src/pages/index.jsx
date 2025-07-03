@@ -3,6 +3,8 @@ import Home from "./Home"
 import ProductPage from "./ProductPage";
 import Cart from "./Cart";
 import Template from "../Layout/Template";
+import Payments from "./Payment";
+import Order from "./Order";
 
 const Pages = [
     {
@@ -21,5 +23,13 @@ const Pages = [
         path : "/cart",
         component : <Template><Cart/></Template>
     },
+    {
+        path : "/checkout",
+        component : <Payments/>
+    },
+    {
+        path : "/pedidos",
+        component : <Template><Order/></Template>
+    }
 ]
 export default Pages;
