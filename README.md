@@ -1,5 +1,5 @@
 
-# 💳 Tornearia Central Shop - E-commerc
+# ⚙️🛠️ Tornearia Central Shop - E-commerc
 
 Este projeto é um e-commerc, desenvolvido na diciplina de Full Cycle com **Spring Boot (Java)** no backend e **React** no frontend.
 
@@ -137,7 +137,7 @@ frontend/
       └── pages
 
 Banco
-![Modelo do Banco de Dados](docs/Modelo relacional-do-banco.png)
+![Modelo do Banco de Dados](docs/Modelo-relacional-do-banco.png)
 ```
 
 
@@ -165,9 +165,4 @@ Banco
 - Dockerizar 
 - Deploy em ambiente de produção  
 
----
-
-## 🧑‍💻 Desenvolvido por
-
-Athams Menezes  
-[https://www.linkedin.com/in/athams-337346274/]  
+--- 
