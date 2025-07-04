@@ -1,7 +1,7 @@
 
-# 💳 Tornearia Central Shop - Sistema de Pagamento com Mercado Pago
+# 💳 Tornearia Central Shop - E-commerc
 
-Este projeto é um e-commerc, desenvolvida com **Spring Boot (Java)** no backend e **React** no frontend.
+Este projeto é um e-commerc, desenvolvido na diciplina de Full Cycle com **Spring Boot (Java)** no backend e **React** no frontend.
 
 ---
 
@@ -137,9 +137,9 @@ frontend/
       └── pages
 
 Banco
+```
 ![Modelo do Banco de Dados](docs/Modelo relacional do banco.png)
 
-```
 
 ---
 
