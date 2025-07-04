@@ -25,10 +25,14 @@ public class CartService {
 	private CartRepository cartRepository;
 	@Autowired
 	private CartItemRepositoy cartItemRepositoy;
-	@Autowired
+
 	private UserRepository userRepository;
-	@Autowired
 	private ProductRepository productRepository;
+	
+	public CartService(UserRepository userRepository, ProductRepository productRepository) {
+		this.userRepository = userRepository;
+		this.productRepository = productRepository;
+	}
 	
 	public CartItemResponseDTO insertCartItem(int user_id, int product_id, int quantity) {
 		User user = userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Error search User"));
@@ -88,8 +92,9 @@ public class CartService {
 		return"deletado";
 	}
 	
-	public BigDecimal getTotalPrice(int cart_id) {
-		List<CartItem> cartItem = cartItemRepositoy.findByCart(cart_id);
+	public BigDecimal getTotalPrice(int user_id) {
+		Cart cart = cartRepository.findByUserId(user_id);
+		List<CartItem> cartItem = cartItemRepositoy.findByCart(cart.getId());
 		
 		BigDecimal total = BigDecimal.ZERO;
 		for(CartItem item : cartItem) {
@@ -101,6 +106,10 @@ public class CartService {
 	
 	public List<CartItemResponseDTO> getAllCartItem(int user_id){
 		Cart cart = cartRepository.findByUserId(user_id);
-		return cartItemRepositoy.findByCart(cart.getId()).stream().map(CartItemMapper :: toDTO).toList();
+		if(cart == null) {
+			return null;
+		}else {
+			return cartItemRepositoy.findByCart(cart.getId()).stream().map(CartItemMapper :: toDTO).toList();
+		}
 	}
 }
