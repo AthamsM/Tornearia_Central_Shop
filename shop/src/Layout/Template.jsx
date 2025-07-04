@@ -11,22 +11,15 @@ function Template({ children }) {
     const [userName, setUserName] = useState("Usuario")
     const [listCartItem, setListCartItem] = useState([])
     const [cartItem, setCartItem] = useState(0) //quantidade
+    const [mensagem, setMensagem] = useState(false)
+    const [search, setSearch] = useState("")
     
     useEffect(() => {
         if (token) {
             const decodeToken = jwtDecode(token)
             setUserName(decodeToken.name)
         }
-    }, [])
-    useEffect(() => {
-        const getTotalPrice = async () => {
-            try{
-                const response = API.get()
-            }catch(error){
-                console.log(error)
-            }
-        }
-    })
+    }, [token])
     useEffect(() => {
         const getQuantityCartItem = async () => {
             try {
@@ -40,11 +33,11 @@ function Template({ children }) {
             }
         }
         getQuantityCartItem()
-    }, [listCartItem, cartItem])
+    }, [listCartItem, cartItem, mensagem])
 
     return (
-        <AppContext.Provider value={{listCartItem, setListCartItem}}>
-            <Navbar cartItem={cartItem} userName={userName}/>
+        <AppContext.Provider value={{listCartItem, setListCartItem, setMensagem, search, setSearch}}>
+            <Navbar cartItem={cartItem} userName={userName} search={search} setSearch={setSearch} mensagem={mensagem} setMensagem={setMensagem}/>
             {children}
         </AppContext.Provider>
     )
