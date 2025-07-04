@@ -38,6 +38,10 @@ public class CartItem {
 		this.cart = cart;
 		this.product = product;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
 
 	public BigDecimal getSubtotal() {
 		return subtotal;

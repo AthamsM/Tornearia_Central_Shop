@@ -25,10 +25,14 @@ public class CartService {
 	private CartRepository cartRepository;
 	@Autowired
 	private CartItemRepositoy cartItemRepositoy;
-	@Autowired
+
 	private UserRepository userRepository;
-	@Autowired
 	private ProductRepository productRepository;
+	
+	public CartService(UserRepository userRepository, ProductRepository productRepository) {
+		this.userRepository = userRepository;
+		this.productRepository = productRepository;
+	}
 	
 	public CartItemResponseDTO insertCartItem(int user_id, int product_id, int quantity) {
 		User user = userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("Error search User"));
@@ -37,15 +41,17 @@ public class CartService {
 		if(cart == null) {
 			cart = createCartToUser(user);
 		}
-		if(product.getStock() < quantity) {
-			throw new RuntimeException("There is not enough quantity in stock") ;
+		CartItem cartItem = cartItemRepositoy.findByCartIdAndProductId(cart.getId(), product_id);
+		if(cartItem == null) {
+			cartItem = new CartItem(product.getPrice().multiply(BigDecimal.valueOf(quantity)), quantity, cart, product);
+		}else {
+			cartItem.setQuantity(cartItem.getQuantity() + quantity);
+			cartItem.setSubtotal(cartItem.getSubtotal().add(product.getPrice().multiply(BigDecimal.valueOf(quantity))));
 		}
 		
-		CartItem cartItem = new CartItem(product.getPrice().multiply(BigDecimal.valueOf(quantity)),
-										quantity,
-										cart,
-										product
-										);
+		if(product.getStock() < cartItem.getQuantity()) {
+			throw new RuntimeException("There is not enough quantity in stock") ;
+		}
 		return CartItemMapper.toDTO(cartItemRepositoy.save(cartItem));
 	}
 	
@@ -63,6 +69,9 @@ public class CartService {
 			cartItemRepositoy.delete(cartItem);
 			return null;
 		}
+		if(cartItem.getProduct().getStock() < cartItem.getQuantity()) {
+			throw new RuntimeException("There is not enough quantity in stock") ;
+		}
 		if(quantity > 0) {
 			cartItem.setSubtotal(cartItem.getSubtotal().add(cartItem.getProduct().getPrice()));			
 		}else {
@@ -77,8 +86,15 @@ public class CartService {
 		return"deletado";
 	}
 	
-	public BigDecimal getTotalPrice(int cart_id) {
-		List<CartItem> cartItem = cartItemRepositoy.findByCart(cart_id);
+	@Transactional
+	public String deleteItemCart(int item_id) {
+		cartItemRepositoy.deleteItemCart(item_id);
+		return"deletado";
+	}
+	
+	public BigDecimal getTotalPrice(int user_id) {
+		Cart cart = cartRepository.findByUserId(user_id);
+		List<CartItem> cartItem = cartItemRepositoy.findByCart(cart.getId());
 		
 		BigDecimal total = BigDecimal.ZERO;
 		for(CartItem item : cartItem) {
@@ -88,7 +104,12 @@ public class CartService {
 		return total;
 	}
 	
-	public List<CartItemResponseDTO> getAllCartItem(int cart_id){
-		return cartItemRepositoy.findByCart(cart_id).stream().map(CartItemMapper :: toDTO).toList();
+	public List<CartItemResponseDTO> getAllCartItem(int user_id){
+		Cart cart = cartRepository.findByUserId(user_id);
+		if(cart == null) {
+			return null;
+		}else {
+			return cartItemRepositoy.findByCart(cart.getId()).stream().map(CartItemMapper :: toDTO).toList();
+		}
 	}
 }

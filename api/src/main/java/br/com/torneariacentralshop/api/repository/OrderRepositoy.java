@@ -10,10 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.torneariacentralshop.api.entities.Order;
 
 @Repository
-public interface OrderRepositoy extends JpaRepository<Order, Integer>{
-	@Query(value = ("SELECT * FROM orders WHERE user_id = :user_id"), nativeQuery = true)
-	Order findByUser(@Param("user_id")int user_id);
-	
+public interface OrderRepositoy extends JpaRepository<Order, Integer>{	
 	@Query(value = ("SELECT * FROM orders WHERE user_id = :user_id"), nativeQuery = true)
 	List<Order> findAllByUserId(@Param("user_id")int user_id);
 }

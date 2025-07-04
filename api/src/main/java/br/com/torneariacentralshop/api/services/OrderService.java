@@ -26,6 +26,7 @@ import br.com.torneariacentralshop.api.repository.OrderRepositoy;
 import br.com.torneariacentralshop.api.repository.PaymentRepository;
 import br.com.torneariacentralshop.api.repository.ProductRepository;
 import br.com.torneariacentralshop.api.repository.UserRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class OrderService {
@@ -34,19 +35,24 @@ public class OrderService {
 	private OrderRepositoy orderRepositoy;
 	@Autowired
 	private OrderItemRepository orderitemRepository;
-	@Autowired
+	
 	private UserRepository userRepository;
-	@Autowired
 	private PaymentRepository paymentRepository;
-	@Autowired
 	private CartRepository cartRepository;
-	@Autowired
 	private ProductRepository productRepository;
-	@Autowired
 	private CartService cartService;
-	@Autowired
 	private ProductService productService;
-
+	
+	public OrderService(UserRepository userRepository, PaymentRepository paymentRepository, CartRepository cartRepository, ProductRepository productRepository, CartService cartService, ProductService productService) {
+	        this.userRepository = userRepository;
+	        this.paymentRepository = paymentRepository;
+	        this.cartRepository = cartRepository;
+	        this.productRepository = productRepository;
+	        this.cartService = cartService;
+	        this.productService = productService;
+	}
+	    
+	@Transactional
 	public OrderResponseDTO createOrder(OrderDTO orderDTO) {
 		User user = userRepository.findById(orderDTO.userId()).orElseThrow(() -> new RuntimeException("Erro search User"));
 		Payment payment = paymentRepository.findById(orderDTO.paymentId()).orElseThrow(() -> new RuntimeException("Error search Payment"));
@@ -55,13 +61,14 @@ public class OrderService {
 		order.setPayment(payment);
 		order.setTrackingCode(assingTrackingCode());
 		orderRepositoy.save(order);
-		InsertOrderItem(order);
+		insertOrderItem(order);
 		return OrderMapper.toDTO(order);
 	}
 	
-	private void InsertOrderItem(Order order) {
+	@Transactional
+	private void insertOrderItem(Order order) {
 		Cart cart = cartRepository.findByUserId(order.getUser().getId());
-		List<CartItemResponseDTO> cartItemDTO = cartService.getAllCartItem(cart.getId());
+		List<CartItemResponseDTO> cartItemDTO = cartService.getAllCartItem(order.getUser().getId());
 		for(CartItemResponseDTO item: cartItemDTO) {
 			Product product = productRepository.findById(item.product().id()).orElseThrow(() -> new RuntimeException("Error search Product"));
 			ProductUpdateDTO  productUpdate = new ProductUpdateDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getRating(), product.getStock() - item.quantity()); 
@@ -84,11 +91,15 @@ public class OrderService {
 	}
 	
 	public List<OrderResponseDTO> getAllOrder(int user_id){
-		return orderRepositoy.findAllByUserId(user_id).stream().map(OrderMapper :: toDTO).toList();
+		if (orderRepositoy.findAllByUserId(user_id) == null) {
+			return null;
+		}else {
+			return orderRepositoy.findAllByUserId(user_id).stream().map(OrderMapper :: toDTO).toList();
+		}
 	}
 	
 	public List<OrderItemResponseDTO> getAllOrderItem(int order_id){
-		return orderitemRepository.findAllByOrderId(order_id).stream().map(OrderItemMapper :: toDTO).toList();
+			return orderitemRepository.findAllByOrderId(order_id).stream().map(OrderItemMapper :: toDTO).toList();
 	}
 	
 }

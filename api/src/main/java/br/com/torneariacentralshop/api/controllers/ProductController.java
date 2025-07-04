@@ -55,7 +55,7 @@ public class ProductController {
 		return new ResponseEntity<>(imageProductService.deleteImageToProduct(image_id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/product/{id}")
 	public ResponseEntity<ProductResponseDTO> readProduct(@PathVariable(name = "id")int id){
 		return new ResponseEntity<>(productService.readProduct(id), HttpStatus.OK);
 	}
