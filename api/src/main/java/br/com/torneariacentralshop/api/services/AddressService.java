@@ -19,8 +19,12 @@ public class AddressService {
 	
 	@Autowired
 	private AddressRepository addressRepository;
-	@Autowired
+
 	private UserRepository userRepository;
+	
+	public AddressService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	public AddressResponseDTO createAddressToUser(AddressDTO addressDTO) {
 		User user = userRepository.findById(addressDTO.user()).orElseThrow(() -> new RuntimeException("Error search User"));
