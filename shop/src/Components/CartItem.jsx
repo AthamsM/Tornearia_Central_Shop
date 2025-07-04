@@ -2,11 +2,9 @@ import { BiTrash } from "react-icons/bi";
 import { AiTwotonePlusSquare } from "react-icons/ai";
 import { AiTwotoneMinusSquare } from "react-icons/ai";
 import API from "../Controller/Api";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function CartItem({ cartItem, setListCartItem }) {
-    console.log(cartItem)
 
     async function updateCartItem(value) {
         try {
@@ -35,7 +33,7 @@ function CartItem({ cartItem, setListCartItem }) {
             <Link to={`/produto/${cartItem.product.id}`} className="col-span-2" >
                 <div className="grid grid-cols-2 place-items-center">
                     <div className="place-content-start" >
-                        <img src="Porca Sextavada.jpeg" alt="" className="w-40" />
+                        <img src={`/products/${cartItem.product.name}.jpg`} alt="" className="w-40" />
                     </div>
                     <div>
                         <p className="text-2xl">{cartItem.product.name}</p>
