@@ -136,9 +136,9 @@ frontend/
       ├── Layout
       └── pages
 
+```
 Banco
 ![Modelo do Banco de Dados](docs/Modelo-relacional-do-banco.png)
-```
 
 
 ---
