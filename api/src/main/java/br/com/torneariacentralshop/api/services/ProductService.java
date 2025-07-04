@@ -11,6 +11,7 @@ import br.com.torneariacentralshop.api.dtos.ProductUpdateDTO;
 import br.com.torneariacentralshop.api.entities.Product;
 import br.com.torneariacentralshop.api.mappers.ProductMapper;
 import br.com.torneariacentralshop.api.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -23,6 +24,7 @@ public class ProductService {
 		return ProductMapper.toDTO(productRepository.save(product));
 	}
 	
+	@Transactional
 	public ProductResponseDTO updateProduct(ProductUpdateDTO updateProductDTO) {
 		
 		Product product = productRepository.findById(updateProductDTO.id()).orElseThrow(() -> new RuntimeException("error search product"));
@@ -35,6 +37,7 @@ public class ProductService {
 			
 	}
 	
+	@Transactional
 	public boolean deleteProduct(int productId) {
 		Product product = productRepository.findById(productId)
 				.orElseThrow(() -> new RuntimeException("error search product"));

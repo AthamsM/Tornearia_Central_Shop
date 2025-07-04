@@ -16,8 +16,12 @@ import br.com.torneariacentralshop.api.repository.ProductRepository;
 public class ImageProductService {
 	@Autowired
 	private ImageProductRepository imageProductRepository;
-	@Autowired
+
 	private ProductRepository productRepository;
+	
+	public ImageProductService(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 	
 	public ImageProductDTO createImageToProduct(ImageProductDTO imageProductDTO) {
 		Product product = productRepository.findById(imageProductDTO.id()).orElseThrow(() -> new RuntimeException("Error search Product"));
