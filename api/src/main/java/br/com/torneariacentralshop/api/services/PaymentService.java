@@ -18,14 +18,18 @@ public class PaymentService {
 	@Autowired
 	private PaymentRepository paymentRepository;
 	
-	@Autowired
 	private UserRepository userRepository;
+	
+	public PaymentService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	
 	public PaymentResponseDTO createPayment(PaymentDTO paymentDTO) {
 		User user = userRepository.findById(paymentDTO.userId()).orElseThrow(() -> new RuntimeException("Error search User"));
 		Payment payment = PaymentMapper.toEntity(paymentDTO);
 		payment.setUser(user);
+		payment.setStatus(PaymentStatus.FINALIZED);
 		return PaymentMapper.toDTO(paymentRepository.save(payment));
 	}
 	
