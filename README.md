@@ -43,6 +43,8 @@ Este projeto é um e-commerce, desenvolvido na disciplina de Full Cycle com **Sp
 - Crie o banco de dados com o nome definido no arquivo `application.properties`. # Citado abaixo
 - Execute as migrations com o comando:
 mvn flyway:migrate
+# Se não funcionar, rode
+mvnw flyway:migrate
 ```
 
 ### Backend (Spring Boot)
